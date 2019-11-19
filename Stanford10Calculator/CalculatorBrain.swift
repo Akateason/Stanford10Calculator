@@ -52,6 +52,7 @@ struct CalculatorBrain {
                 }
             case .binaryOperation(let function):
                 if accumulator != nil {
+                    //struct自带 初始化结构体
                     pbo = PendingBinaryOperation(function: function, firstOperand: accumulator!)
                     accumulator = nil
                 }
@@ -83,11 +84,11 @@ struct CalculatorBrain {
         }
     }
     
+    
     mutating func setOperand(_ operand: Double) {
         accumulator = operand
     }
-    
-    
+        
     /// result prop 只读
     var result: Double? {
         get {
