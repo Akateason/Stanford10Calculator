@@ -13,6 +13,7 @@ import Foundation
 
 struct CalculatorBrain {
     
+    //  私有变量 记录 当前结果
     private var accumulator: Double?
     
     // swift 强大的枚举 .
@@ -23,7 +24,8 @@ struct CalculatorBrain {
         case binaryOperation((Double, Double) -> Double)    // 二元 操作
         case equals
     }
-    
+        
+    /// 私有变量 Dictionary 记录所有 运算符号
     private var operations: Dictionary<String,Operation> = [
         "π" : Operation.constant(Double.pi),
         "e" : Operation.constant(M_E),
@@ -36,7 +38,9 @@ struct CalculatorBrain {
         "-" : Operation.binaryOperation({ $0 - $1 }),
         "=" : Operation.equals
     ]
-    
+        
+    /// 可变方法  运算
+    /// - Parameter symbol: 运算符
     mutating func performOperation(_ symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
@@ -51,13 +55,14 @@ struct CalculatorBrain {
                     pbo = PendingBinaryOperation(function: function, firstOperand: accumulator!)
                     accumulator = nil
                 }
-                
             case .equals:
                 performBinaryOperation()
             }
         }
     }
     
+    
+    /// 点击等号  二元运算
     private mutating func performBinaryOperation() {
         if pbo != nil && accumulator != nil {
             accumulator = pbo!.perform(with: accumulator!)
@@ -65,8 +70,10 @@ struct CalculatorBrain {
         }
     }
     
+    /// 私有变量 等待二元操作 结构体 (记录上个数字)
     private var pbo: PendingBinaryOperation?
     
+    ///等待二元操作 结构体 声明
     private struct PendingBinaryOperation {
         let function: (Double,Double) -> Double
         let firstOperand: Double
@@ -80,6 +87,8 @@ struct CalculatorBrain {
         accumulator = operand
     }
     
+    
+    /// result prop 只读
     var result: Double? {
         get {
             return accumulator
