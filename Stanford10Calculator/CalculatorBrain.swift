@@ -71,7 +71,7 @@ struct CalculatorBrain {
         }
     }
     
-    /// 私有变量 等待二元操作 结构体 (记录上个数字)
+    /// 私有变量 等待二元操作 结构体 (记录上个数字) 结构体不必设初值
     private var pbo: PendingBinaryOperation?
     
     ///等待二元操作 结构体 声明
