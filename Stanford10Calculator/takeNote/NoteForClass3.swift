@@ -318,6 +318,15 @@ class NoteForClass3: NSObject {
 
  */
  
-    
+/***
+     14. Assertions
+     断言,
+     assert(() -> bool, "message")
+     当这个条件 为 false , 会crash你的应用.
+     
+     e.g.
+     assert(validation() != nil, "the validation function returned nil" )
+     
+*/
     
 }
