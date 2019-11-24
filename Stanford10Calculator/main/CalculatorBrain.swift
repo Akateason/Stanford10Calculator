@@ -13,6 +13,11 @@ import Foundation
 
 struct CalculatorBrain {
     
+    mutating func addUnaryOperation(named symbol: String, _ operation: @escaping (Double) -> Double) {
+        operations[symbol] = Operation.unaryOperation(operation)
+    }
+    
+    
     //  私有变量 记录 当前结果
     private var accumulator: Double?
     

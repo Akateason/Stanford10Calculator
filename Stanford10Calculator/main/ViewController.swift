@@ -14,6 +14,19 @@ class ViewController: UIViewController {
     
     var userIsInTheMiddleOfTyping = false
     
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // cls6 处理循环引用.
+        brain.addUnaryOperation(named: "✅") { [unowned self] in
+            self.display.textColor = UIColor.green
+            return sqrt($0)
+        }
+    }
+    
+    
     @IBAction func touchDigit(_ sender: UIButton) {
         // !来解包一个optionnal类型的值.
         let digit = sender.currentTitle!
@@ -63,13 +76,7 @@ class ViewController: UIViewController {
     
     
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
+
     
     
 }
