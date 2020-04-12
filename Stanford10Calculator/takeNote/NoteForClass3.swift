@@ -28,7 +28,7 @@ class NoteForClass3: NSObject {
 //        print(number)
 //        print(value)
         
-        let x: (w: String, i: Int, v: Double) = ("hello",5,0.43)
+        let x: (w: String, i: Int, v: Double) = ("hello", 5, 0.43)
         print(x.w)
         print(x.i)
         print(x.v)

@@ -47,6 +47,7 @@ struct CalculatorBrain {
     /// 可变方法  运算
     /// - Parameter symbol: 运算符
     mutating func performOperation(_ symbol: String) {
+        
         if let operation = operations[symbol] {
             switch operation {
             case .constant(let value):
