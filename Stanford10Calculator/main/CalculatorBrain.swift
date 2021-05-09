@@ -7,9 +7,6 @@
 //
 
 import Foundation
- 
-
-
 
 struct CalculatorBrain {
     
@@ -100,7 +97,5 @@ struct CalculatorBrain {
         get {
             return accumulator
         }
-    }
-    
-    
+    }        
 }
