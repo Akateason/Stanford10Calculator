@@ -10,21 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var display: UILabel!
+    // MARK: PROPS
     
-    var userIsInTheMiddleOfTyping = false
+    /// 计算器model
+    private var brain = CalculatorBrain()
             
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // cls6 处理循环引用.
-        brain.addUnaryOperation(named: "✅") { [unowned self] in
-            self.display.textColor = UIColor.green
-            return sqrt($0)
+    /// 用户是否正在输入
+    var userIsInTheMiddleOfTyping = false
+                    
+    /// 输出值 , 包了getter setter
+    var displayValue: Double {
+        get {
+            return Double(display.text!)!
+        }
+        set {
+            display.text = String(newValue)
         }
     }
     
+    /// UI label
+    @IBOutlet weak var display: UILabel!
     
+            
+    
+    // MARK: FUNCS
+    
+    /// 点击数字
+    /// - Parameter sender: button
     @IBAction func touchDigit(_ sender: UIButton) {
         // !来解包一个optionnal类型的值.
         let digit = sender.currentTitle!
@@ -42,17 +54,8 @@ class ViewController: UIViewController {
         }
     }
     
-    var displayValue: Double {
-        get {
-            return Double(display.text!)!
-        }
-        set {
-            display.text = String(newValue)
-        }
-    }
-    
-    private var brain = CalculatorBrain()
-    
+    /// 点击运算符
+    /// - Parameter sender: button    
     @IBAction func performOperation(_ sender: UIButton) {
         if userIsInTheMiddleOfTyping {
             brain.setOperand(displayValue)
@@ -67,6 +70,19 @@ class ViewController: UIViewController {
             displayValue = result
         }
     }
-
+    
+    
+    // MARK: LIFE
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // cls6 处理循环引用.
+        brain.addUnaryOperation(named: "✅") { [unowned self] in
+            self.display.textColor = UIColor.green
+            return sqrt($0)
+        }
+    }
+    
+    
 }
 
